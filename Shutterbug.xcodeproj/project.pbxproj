@@ -15,7 +15,8 @@
 		F231DEDD15C0E952003124B9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F231DEDC15C0E952003124B9 /* AppDelegate.m */; };
 		F231DEE015C0E952003124B9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F231DEDE15C0E952003124B9 /* MainStoryboard_iPhone.storyboard */; };
 		F231DEE315C0E952003124B9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F231DEE115C0E952003124B9 /* MainStoryboard_iPad.storyboard */; };
-		F231DEE615C0E952003124B9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F231DEE515C0E952003124B9 /* ViewController.m */; };
+		F231DEEF15C0E9AE003124B9 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = F231DEEE15C0E9AE003124B9 /* FlickrFetcher.m */; };
+		F231DEF215C0EA5F003124B9 /* FlickrPhotoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F231DEF115C0EA5F003124B9 /* FlickrPhotoTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +32,11 @@
 		F231DEDC15C0E952003124B9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F231DEDF15C0E952003124B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		F231DEE215C0E952003124B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		F231DEE415C0E952003124B9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F231DEE515C0E952003124B9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F231DEEC15C0E9AE003124B9 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
+		F231DEED15C0E9AE003124B9 /* FlickrFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrFetcher.h; sourceTree = "<group>"; };
+		F231DEEE15C0E9AE003124B9 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrFetcher.m; sourceTree = "<group>"; };
+		F231DEF015C0EA5F003124B9 /* FlickrPhotoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotoTableViewController.h; sourceTree = "<group>"; };
+		F231DEF115C0EA5F003124B9 /* FlickrPhotoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +83,13 @@
 		F231DED215C0E952003124B9 /* Shutterbug */ = {
 			isa = PBXGroup;
 			children = (
-				F231DEDB15C0E952003124B9 /* AppDelegate.h */,
-				F231DEDC15C0E952003124B9 /* AppDelegate.m */,
 				F231DEDE15C0E952003124B9 /* MainStoryboard_iPhone.storyboard */,
+				F231DEEC15C0E9AE003124B9 /* FlickrAPIKey.h */,
+				F231DEED15C0E9AE003124B9 /* FlickrFetcher.h */,
+				F231DEEE15C0E9AE003124B9 /* FlickrFetcher.m */,
 				F231DEE115C0E952003124B9 /* MainStoryboard_iPad.storyboard */,
-				F231DEE415C0E952003124B9 /* ViewController.h */,
-				F231DEE515C0E952003124B9 /* ViewController.m */,
+				F231DEF015C0EA5F003124B9 /* FlickrPhotoTableViewController.h */,
+				F231DEF115C0EA5F003124B9 /* FlickrPhotoTableViewController.m */,
 				F231DED315C0E952003124B9 /* Supporting Files */,
 			);
 			path = Shutterbug;
@@ -93,6 +98,8 @@
 		F231DED315C0E952003124B9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F231DEDB15C0E952003124B9 /* AppDelegate.h */,
+				F231DEDC15C0E952003124B9 /* AppDelegate.m */,
 				F231DED415C0E952003124B9 /* Shutterbug-Info.plist */,
 				F231DED515C0E952003124B9 /* InfoPlist.strings */,
 				F231DED815C0E952003124B9 /* main.m */,
@@ -167,7 +174,8 @@
 			files = (
 				F231DED915C0E952003124B9 /* main.m in Sources */,
 				F231DEDD15C0E952003124B9 /* AppDelegate.m in Sources */,
-				F231DEE615C0E952003124B9 /* ViewController.m in Sources */,
+				F231DEEF15C0E9AE003124B9 /* FlickrFetcher.m in Sources */,
+				F231DEF215C0EA5F003124B9 /* FlickrPhotoTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +266,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shutterbug/Shutterbug-Prefix.pch";
 				INFOPLIST_FILE = "Shutterbug/Shutterbug-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -269,6 +278,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shutterbug/Shutterbug-Prefix.pch";
 				INFOPLIST_FILE = "Shutterbug/Shutterbug-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

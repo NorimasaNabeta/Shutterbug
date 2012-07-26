@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FlickrPhotoTableViewController.h
 //  Shutterbug
 //
 //  Created by Norimasa Nabeta on 2012/07/26.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface FlickrPhotoTableViewController : UITableViewController
+@property (nonatomic,strong) NSArray *photos;
 @end
