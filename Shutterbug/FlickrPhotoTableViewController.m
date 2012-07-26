@@ -10,7 +10,8 @@
 #import "FlickrFetcher.h"
 
 @interface FlickrPhotoTableViewController ()
-
+// keys: photographer NSString, values: NSArray of photo NSDictionary
+@property (nonatomic, strong) NSDictionary *photosByPhotographer;
 @end
 
 @implementation FlickrPhotoTableViewController
@@ -34,11 +35,28 @@
     dispatch_release(downloadQueue);
 }
 
+- (void)updatePhotosByPhotographer
+{
+    NSMutableDictionary *photosByPhotographer = [NSMutableDictionary dictionary];
+    for (NSDictionary *photo in self.photos) {
+        NSString *photographer = [photo objectForKey:FLICKR_PHOTO_OWNER];
+        NSMutableArray *photos = [photosByPhotographer objectForKey:photographer];
+        if (!photos) {
+            photos = [NSMutableArray array];
+            [photosByPhotographer setObject:photos forKey:photographer];
+            // NSLog(@"Photographer: %@", photographer);
+        }
+        [photos addObject:photo];
+    }
+    self.photosByPhotographer = photosByPhotographer;
+}
+
 -(void) setPhotos:(NSArray *)photos
 {
     if(_photos != photos){
         _photos = photos;
         // Model changed, so update our View (the table)
+        [self updatePhotosByPhotographer];
         if (self.tableView.window) [self.tableView reloadData];
     }
 }
@@ -50,35 +68,43 @@
 }
 
 #pragma mark - Table view data source
+- (NSString *)photographerForSection:(NSInteger)section
+{
+    return [[self.photosByPhotographer allKeys] objectAtIndex:section];
+}
 
-/*
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [self photographerForSection:section];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return [self.photosByPhotographer count];
 }
-*/
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-// #warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return [self.photos count];
+    // return [self.photos count];
+    NSString *photographer = [self photographerForSection:section];
+    NSArray *photosByPhotographer = [self.photosByPhotographer objectForKey:photographer];
+    return [photosByPhotographer count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Flickr Photo";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
-    NSDictionary *photo = [self.photos objectAtIndex:indexPath.row];
+    // NSDictionary *photo = [self.photos objectAtIndex:indexPath.row];
+    NSString *photographer = [self photographerForSection:indexPath.section];
+    NSArray *photosByPhotographer = [self.photosByPhotographer objectForKey:photographer];
+    NSDictionary *photo = [photosByPhotographer objectAtIndex:indexPath.row];
     cell.textLabel.text = [photo objectForKey:FLICKR_PHOTO_TITLE];
     cell.detailTextLabel.text = [photo objectForKey:FLICKR_PHOTO_OWNER];
     
