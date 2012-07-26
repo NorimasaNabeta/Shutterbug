@@ -8,10 +8,12 @@
 
 #import "FlickrPhotoTableViewController.h"
 #import "FlickrFetcher.h"
+#import "FlickrPhotoImageViewController.h"
 
 @interface FlickrPhotoTableViewController ()
 // keys: photographer NSString, values: NSArray of photo NSDictionary
 @property (nonatomic, strong) NSDictionary *photosByPhotographer;
+@property (nonatomic, strong) NSURL *photoURL;
 @end
 
 @implementation FlickrPhotoTableViewController
@@ -73,7 +75,8 @@
     return [[self.photosByPhotographer allKeys] objectAtIndex:section];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (NSString *)tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section
 {
     return [self photographerForSection:section];
 }
@@ -83,7 +86,8 @@
     return [self.photosByPhotographer count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
 {
     // return [self.photos count];
     NSString *photographer = [self photographerForSection:section];
@@ -91,7 +95,8 @@
     return [photosByPhotographer count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Flickr Photo";
     
@@ -152,7 +157,8 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
     /*
@@ -162,5 +168,26 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+-(void)tableView:(UITableView *)tableView
+accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSString *photographer = [self photographerForSection:indexPath.section];
+    NSArray *photosByPhotographer = [self.photosByPhotographer objectForKey:photographer];
+    NSDictionary *photo = [photosByPhotographer objectAtIndex:indexPath.row];
+    // cell.textLabel.text = [photo objectForKey:FLICKR_PHOTO_TITLE];
+    // cell.detailTextLabel.text = [photo objectForKey:FLICKR_PHOTO_OWNER];
+    self.photoURL = [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];
+    NSLog(@"URL: %@", self.photoURL);
+    [self performSegueWithIdentifier:@"FlickrPhotoImage" sender:self];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"FlickrPhotoImage"]) {
+        [segue.destinationViewController setUrlPhoto:self.photoURL ];
+    }
+}
+
 
 @end
