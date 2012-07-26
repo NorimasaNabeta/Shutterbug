@@ -38,7 +38,8 @@
 {
     if(_photos != photos){
         _photos = photos;
-        [self.tableView reloadData];
+        // Model changed, so update our View (the table)
+        if (self.tableView.window) [self.tableView reloadData];
     }
 }
 
