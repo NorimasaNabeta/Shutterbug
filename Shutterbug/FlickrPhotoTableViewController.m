@@ -167,9 +167,28 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        self.detailViewController.detailItem = object;
+        NSString *photographer = [self photographerForSection:indexPath.section];
+        NSArray *photosByPhotographer = [self.photosByPhotographer objectForKey:photographer];
+        NSDictionary *photo = [photosByPhotographer objectAtIndex:indexPath.row];
+        // cell.textLabel.text = [photo objectForKey:FLICKR_PHOTO_TITLE];
+        // cell.detailTextLabel.text = [photo objectForKey:FLICKR_PHOTO_OWNER];
+        self.photoURL = [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];
+        NSLog(@"URL: %@", self.photoURL);
+    }
+
 }
 
--(void)tableView:(UITableView *)tableView
+ - (FlickrPhotoImageViewController *)splitViewHappinessViewController
+{
+    id hvc = [self.splitViewController.viewControllers lastObject];
+    if (![hvc isKindOfClass:[FlickrPhotoImageViewController class]]) {
+        hvc = nil;
+    }
+    return hvc; 
+}
+ -(void)tableView:(UITableView *)tableView
 accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -179,8 +198,14 @@ accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
     // cell.textLabel.text = [photo objectForKey:FLICKR_PHOTO_TITLE];
     // cell.detailTextLabel.text = [photo objectForKey:FLICKR_PHOTO_OWNER];
     self.photoURL = [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];
-    NSLog(@"URL: %@", self.photoURL);
-    [self performSegueWithIdentifier:@"FlickrPhotoImage" sender:self];
+    // NSLog(@"URL: %@", self.photoURL);
+
+    
+    if ([self splitViewHappinessViewController]) {                      // if in split view
+        [self splitViewHappinessViewController].urlPhoto = self.photoURL;  // just set happiness in detail
+    } else {
+        [self performSegueWithIdentifier:@"FlickrPhotoImage" sender:self];
+    }    
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

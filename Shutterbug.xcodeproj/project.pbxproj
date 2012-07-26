@@ -40,6 +40,7 @@
 		F231DEF115C0EA5F003124B9 /* FlickrPhotoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoTableViewController.m; sourceTree = "<group>"; };
 		F231DEF315C0F5D4003124B9 /* FlickrPhotoImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotoImageViewController.h; sourceTree = "<group>"; };
 		F231DEF415C0F5D4003124B9 /* FlickrPhotoImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoImageViewController.m; sourceTree = "<group>"; };
+		F231DEF615C10DA3003124B9 /* SplitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +87,7 @@
 		F231DED215C0E952003124B9 /* Shutterbug */ = {
 			isa = PBXGroup;
 			children = (
+				F231DEF615C10DA3003124B9 /* SplitViewBarButtonItemPresenter.h */,
 				F231DEDE15C0E952003124B9 /* MainStoryboard_iPhone.storyboard */,
 				F231DEF315C0F5D4003124B9 /* FlickrPhotoImageViewController.h */,
 				F231DEF415C0F5D4003124B9 /* FlickrPhotoImageViewController.m */,

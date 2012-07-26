@@ -9,31 +9,19 @@
 #import "FlickrPhotoImageViewController.h"
 
 @interface FlickrPhotoImageViewController () <UIScrollViewDelegate>
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
 
 @implementation FlickrPhotoImageViewController
+@synthesize toolbar;
 @synthesize imageView;
 @synthesize scrollView;
+@synthesize splitViewBarButtonItem=_splitViewBarButtonItem;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+// http://stackoverflow.com/questions/3739996/reload-the-view-in-iphone-in-viewwillappear
+-(void) resetView
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     // http://stackoverflow.com/questions/11587513/how-to-center-uiactivityindicator
     //spinner.center = self.view.center;
@@ -55,12 +43,43 @@
         });
     });
     dispatch_release(downloadQueue);
+    [self.view setNeedsDisplay];
+}
+
+- (void) setUrlPhoto:(NSURL *)urlPhoto
+{
+    if(_urlPhoto != urlPhoto){
+        _urlPhoto = urlPhoto;
+        [self resetView];
+    }
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self resetView];
 }
 
 - (void)viewDidUnload
 {
     [self setImageView:nil];
     [self setScrollView:nil];
+    [self setToolbar:nil];
+    [self setToolbar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -74,6 +93,58 @@
 - (UIView*) viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.imageView;
+}
+
+#pragma mark - SplitViewBarButtonItemPresenter
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    if (splitViewBarButtonItem != _splitViewBarButtonItem) {
+        NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+        if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
+        if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
+        self.toolbar.items = toolbarItems;
+        _splitViewBarButtonItem = splitViewBarButtonItem;
+    }
+}
+
+
+-(void) awakeFromNib
+{
+    [super awakeFromNib];
+    self.splitViewController.delegate=self;
+}
+
+#pragma mark - UISplitViewControllerDelegate
+-(id <SplitViewBarButtonItemPresenter>) splitViewBarButtonItemPresenter
+{
+    id detailVC = [self.splitViewController.viewControllers lastObject];
+    if (![detailVC conformsToProtocol:@protocol(SplitViewBarButtonItemPresenter)]) {
+        detailVC = nil;
+    }
+    return detailVC;
+}
+
+-(BOOL) splitViewController:(UISplitViewController *)svc
+   shouldHideViewController:(UIViewController *)vc
+              inOrientation:(UIInterfaceOrientation)orientation
+{
+    return [self splitViewBarButtonItemPresenter] ? UIInterfaceOrientationIsPortrait(orientation) : NO;
+}
+-(void) splitViewController:(UISplitViewController *)svc
+     willHideViewController:(UIViewController *)aViewController
+          withBarButtonItem:(UIBarButtonItem *)barButtonItem
+       forPopoverController:(UIPopoverController *)pc
+{
+    barButtonItem.title = self.title;
+    [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = barButtonItem;
+    
+}
+
+-(void) splitViewController:(UISplitViewController *)svc
+     willShowViewController:(UIViewController *)aViewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = nil;
 }
 
 @end

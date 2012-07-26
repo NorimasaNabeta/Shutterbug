@@ -1,25 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="CSE-xW-rSs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="ggU-xh-Hkz">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller - FlickrP-->
+        <scene sceneID="VZR-zh-AHQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Rt-Le-yVq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController title="FlickrP" id="ToG-n4-ZJn" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="aXb-8J-WoK">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9vK-ni-GYQ" kind="relationship" relationship="rootViewController" id="sxg-tx-Xcw"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-451" y="-687"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="gEz-CY-yJy">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N8W-lb-slV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <splitViewController id="ggU-xh-Hkz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <connections>
+                        <segue destination="ToG-n4-ZJn" kind="relationship" relationship="masterViewController" id="WNx-h8-fYq"/>
+                        <segue destination="ULv-Se-dHy" kind="relationship" relationship="detailViewController" id="uTk-VG-FBe"/>
+                    </connections>
+                </splitViewController>
+            </objects>
+            <point key="canvasLocation" x="-1433" y="-218"/>
+        </scene>
         <!--Flickr Photo Table View Controller - Flickr-->
         <scene sceneID="3F2-LB-N0j">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HU6-zp-kCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="9vK-ni-GYQ" customClass="FlickrPhotoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZkW-j5-MsV">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="788"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Flickr Photo" textLabel="Rj4-UH-bRD" detailTextLabel="wuw-Yd-RJ1" style="IBUITableViewCellStyleSubtitle" id="MKr-qP-Rpb">
-                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rj4-UH-bRD">
@@ -39,9 +68,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="ULv-Se-dHy" kind="push" identifier="FlickrPhotoImage" id="H1r-FG-6V9"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -58,24 +84,29 @@
                     </navigationItem>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="6" y="66"/>
+            <point key="canvasLocation" x="-20" y="-682"/>
         </scene>
-        <!--Flickr Photo Image View Controller - Photo-->
+        <!--Flickr Photo Image View Controller - FlickrPhoto-->
         <scene sceneID="NAD-ol-O6C">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fa9-kE-nkC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="ULv-Se-dHy" customClass="FlickrPhotoImageViewController" sceneMemberID="viewController">
+                <viewController title="FlickrPhoto" id="ULv-Se-dHy" customClass="FlickrPhotoImageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="khH-zl-EAR">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="oUa-Id-WTR">
-                                <rect key="frame" x="-20" y="-20" width="808" height="1000"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="UFZ-tz-Flx">
+                                <rect key="frame" x="0.0" y="0.0" width="874" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <items/>
+                            </toolbar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.5" maximumZoomScale="5" id="5Hf-8k-Xl5">
+                                <rect key="frame" x="-20" y="44" width="808" height="987"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="VcI-Xy-KXK">
-                                        <rect key="frame" x="20" y="20" width="768" height="960"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="xaJ-uf-ua6">
+                                        <rect key="frame" x="20" y="0.0" width="768" height="967"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
                             </scrollView>
@@ -84,47 +115,15 @@
                     </view>
                     <navigationItem key="navigationItem" title="Photo" id="419-BN-3jo"/>
                     <connections>
-                        <outlet property="imageView" destination="VcI-Xy-KXK" id="HO0-MS-WFc"/>
-                        <outlet property="scrollView" destination="oUa-Id-WTR" id="Jgm-F0-Lye"/>
+                        <outlet property="imageView" destination="xaJ-uf-ua6" id="Ill-5I-URI"/>
+                        <outlet property="scrollView" destination="5Hf-8k-Xl5" id="bJ0-UH-a2r"/>
+                        <outlet property="toolbar" destination="UFZ-tz-Flx" id="Bie-Mr-9zp"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="960" y="-335"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Hxv-Ug-1L2">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8FF-SL-CIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="CSE-xW-rSs" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pWP-9a-2yH">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="9vK-ni-GYQ" kind="relationship" relationship="rootViewController" id="WsL-og-4GM"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="6" y="-220"/>
+            <point key="canvasLocation" x="-473" y="265"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="FlickrPhotoImageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrPhotoImageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="FlickrPhotoTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrPhotoTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="refresh:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
